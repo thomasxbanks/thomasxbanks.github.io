@@ -49,7 +49,7 @@ const banner = `/* LXLabs ${packageJson.name} v${packageJson.version} */`;
 
 const root = './';
 const source = 'src/';
-const dist = 'dist/';
+const dist = '';
 
 const path = {
   css: {
@@ -180,7 +180,7 @@ const template = () => src(`${path.hbs.in}**/${path.hbs.main}`)
   .pipe(dest(path.hbs.out));
 
 const html = () => src(`${root + dist}**/*.html`)
-  .pipe(htmlmin({ collapseWhitespace: !!isProduction }))
+  // .pipe(isProduction ? htmlmin({ collapseWhitespace: true }) : noop())
   .pipe(dest(root + dist))
   .pipe(browserSync.stream());
 

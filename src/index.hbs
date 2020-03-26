@@ -20,7 +20,7 @@
   <main>
     {{ fileInclude 'src/components/partial/hero.hbs' }}
     <section data-projects class="grid central-column grid_container">
-      <h2>Projects</h2>
+      <h2 class="section-title">Projects</h2>
       {{ fileInclude 'src/components/partial/projects.hbs' }}
       <div class="grid grid_container">
         {{ fileInclude 'src/components/atom/load-more.hbs' }}
@@ -28,7 +28,7 @@
       </div>
     </section>
     <section class="grid grid_container central-column">
-      <h2>Articles</h2>
+      <h2 class="section-title">Articles</h2>
       {{#each posts}}
       <article class="card post">
         <header>

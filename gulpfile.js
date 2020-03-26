@@ -49,7 +49,7 @@ const banner = `/* LXLabs ${packageJson.name} v${packageJson.version} */`;
 
 const root = './';
 const source = 'src/';
-const dist = './';
+const dist = 'dist/';
 
 const path = {
   css: {

@@ -1,0 +1,26 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 320px;
+  background-color: var(--clr-background-card);
+  color: var(--clr-foreground-card);
+  padding: 1rem;
+  filter: drop-shadow(0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.15));
+
+  * {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+
+    +* {
+      padding-top: 1em;
+    }
+  }
+
+  footer {
+    margin-top: auto;
+  }
+}

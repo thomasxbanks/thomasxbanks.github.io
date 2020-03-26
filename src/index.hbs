@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{{copy.title}}</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<!-- build:device -->
+
+<body data-environment="" data-theme="light">
+  <!-- endbuild -->
+
+  {{ fileInclude 'src/components/partial/header.hbs' }}
+
+
+  <main>
+    {{ fileInclude 'src/components/partial/hero.hbs' }}
+    <section data-projects class="grid central-column grid_container">
+      <h2>Projects</h2>
+      {{ fileInclude 'src/components/partial/projects.hbs' }}
+      <div class="grid grid_container">
+        {{ fileInclude 'src/components/atom/load-more.hbs' }}
+        {{ fileInclude 'src/components/atom/toggle-theme.hbs' }}
+      </div>
+    </section>
+    <section class="grid grid_container central-column">
+      <h2>Articles</h2>
+      {{#each posts}}
+      <article class="card post">
+        <header>
+          <img src="{{thumbnail.source_url}}" alt="{{{thumbnail.alt_text}}}" width="{{thumbnail.width}}" height="{{thumbnail.height}}">
+          <h1>{{{title.rendered}}}</h1>
+        </header>
+        <div>{{{excerpt.rendered}}}</div>
+        <footer class="grid grid_container">
+          <a href="{{link}}" class="button" target="_blank" rel="nofollow noopener noreferrer">Read more</a>
+        </footer>
+      </article>
+      {{/each}}
+    </section>
+  </main>
+
+  {{ fileInclude 'src/components/partial/footer.hbs' }}
+
+
+  <script src="js/index.js"></script>
+  <script src="vendor/index.js"></script>
+</body>
+
+</html>

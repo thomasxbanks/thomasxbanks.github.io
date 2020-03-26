@@ -1,0 +1,69 @@
+# This image has PHP, .git & NodeJS included
+image: tetraweb/php:latest
+
+# Set the stages
+stages:
+  - build
+  - deploy_dev
+  - deploy_uat
+
+# Select what we should cache
+cache:
+  paths:
+  - node_modules/
+
+# Non-sensitive values to be used throughout this scriptcdcd
+variables:
+  # Timezone will be used both for system and php date.timezone php.ini value
+  TIMEZONE: "Europe/London"
+
+build:
+  stage: build
+  tags:
+    - H4B-Dev
+  script:
+    - npm install
+    - npm start
+  cache:
+    key: ${CI_BUILD_REF_NAME}
+    paths:
+      - node_modules/
+  artifacts:
+    paths:
+      - dist/
+  only:
+    - develop
+
+# deploy to dev
+deploy_dev:
+  stage: deploy_dev
+  environment:
+    name: dev
+    url: http://%PROJECT_TITLE%.ci-dev.havaslynx.com/
+  tags:
+    - H4B-Dev
+  script:
+    - echo "${SSH_PRIVATE_KEY_DEV}" > id_rsa
+    - chmod 700 id_rsa
+    - mkdir "${HOME}/.ssh"
+    - echo "${SSH_HOST_KEY_DEV}" > "${HOME}/.ssh/known_hosts"
+    - rsync -hrvz -e 'ssh -i id_rsa' --exclude='.git/' ./dist ci@10.142.53.11:/storage/var/www/%PROJECT_TITLE%/html
+  only:
+    - develop
+
+# deploy to uat
+deploy_uat:
+  stage: deploy_uat
+  environment:
+    name: uat
+    url: http://%PROJECT_TITLE%.ci-dev.havaslynx.com/
+  tags:
+    - H4B-Dev
+  script:
+    - echo "${SSH_PRIVATE_KEY_UAT}" > id_rsa
+    - chmod 700 id_rsa
+    - mkdir "${HOME}/.ssh"
+    - echo "${SSH_HOST_KEY_UAT}" > "${HOME}/.ssh/known_hosts"
+    - rsync -hrvz -e 'ssh -i id_rsa' --exclude='.git/' ./dist ci@10.142.53.223:/var/www/%PROJECT_TITLE%/html
+  only:
+    - uat

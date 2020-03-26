@@ -1,0 +1,30 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "globals": {
+    "cordova": true,
+    "Lockr": true,
+    "screen": true,
+    "StatusBar": true,
+    "window": true
+  },
+  "extends": "airbnb-base",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "rules": {
+    "padded-blocks": ["warn", {
+      "classes": "always"
+    }],
+    "import/extensions": ["warn", "never", {
+      "ignorePackages": true
+    }],
+    "no-restricted-globals": ["warn"],
+    "max-len": ["warn"]
+  }
+}

@@ -1,0 +1,9 @@
+.post {
+  img {
+    height: auto;
+
+    [data-theme="dark"] & {
+      filter: grayscale(100%);
+    }
+  }
+}

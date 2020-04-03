@@ -2,6 +2,7 @@ import { getUser } from './DataHandler';
 
 const displayHero = async () => {
   const user = await getUser();
+  console.log('user = ', user);
   if (!user) return;
   const template = document.querySelector('[data-template="hero"]');
   const hero = document.importNode(template, true);

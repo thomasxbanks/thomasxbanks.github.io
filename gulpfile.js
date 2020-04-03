@@ -95,20 +95,22 @@ const api = async (endpoint) => {
 const endpoint = {
   user: 'https://api.github.com/users/thomasxbanks',
   projects: 'https://api.github.com/users/thomasxbanks/repos?page=1&per_page=6',
-  posts: 'http://scrummable.com/wp-json/wp/v2/posts',
+  posts: 'http://scrummable.com/wp-json/wp/v2/posts?_embed&&author=1&per_page=6',
 };
 
 const getData = async () => {
   data.user = await api(endpoint.user);
   data.projects = await api(endpoint.projects);
   data.posts = await api(endpoint.posts);
-  data.posts.map(async (post) => {
-    const featured_image = await api(`http://scrummable.com/wp-json/wp/v2/media/${post.featured_media}`);
-    console.log(featured_image);
-    post.thumbnail = featured_image.media_details.sizes.medium_large;
+  await data.posts.map(async (post) => {
+    const featured_media = post._embedded['wp:featuredmedia'][0];
+    post.thumbnail = featured_media.media_details.sizes.medium_large || {};
+    post.thumbnail.alt_text = featured_media.alt_text;
+
     return post;
+
   });
-  console.log(data);
+  console.log(data.user);
 };
 
 

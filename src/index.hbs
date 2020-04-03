@@ -19,14 +19,16 @@
 
   <main>
     {{ fileInclude 'src/components/partial/hero.hbs' }}
-    <section data-projects class="grid central-column grid_container">
+
+    <section data-projects class="grid_container central-column">
       <h2 class="section-title">Projects</h2>
+      <div class="cards grid central-column grid_container"></div>
       {{ fileInclude 'src/components/partial/projects.hbs' }}
-      <div class="grid grid_container">
+      {{!-- <div class="grid grid_container">
         {{ fileInclude 'src/components/atom/load-more.hbs' }}
-        {{ fileInclude 'src/components/atom/toggle-theme.hbs' }}
-      </div>
+      </div> --}}
     </section>
+
     <section class="grid grid_container central-column">
       <h2 class="section-title">Articles</h2>
       {{#each posts}}
@@ -42,6 +44,7 @@
       </article>
       {{/each}}
     </section>
+
   </main>
 
   {{ fileInclude 'src/components/partial/footer.hbs' }}

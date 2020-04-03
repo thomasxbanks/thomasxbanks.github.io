@@ -26,7 +26,7 @@ const displayProject = (project, grid) => {
 const displayProjects = async () => {
   const projects = await getProjects();
   if (!projects) return;
-  const grid = document.querySelector('[data-projects]');
+  const grid = document.querySelector('[data-projects] .cards');
 
   projects.forEach((project) => displayProject(project, grid));
 
